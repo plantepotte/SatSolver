@@ -17,6 +17,7 @@ set_target_properties(
             CMAKE_CXX_EXTENSIONS OFF
 )
 
+
 include(GNUInstallDirs)
 
 target_link_directories(
