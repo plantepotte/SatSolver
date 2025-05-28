@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 add_library(
         SatSolver
         STATIC
-        src/Solver.cpp
+        src/DPLLSolver.cpp
 )
 
 set_target_properties(
@@ -36,7 +36,7 @@ install(TARGETS ${PROJECT_NAME}
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(FILES include/Solver.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES include/DPLLSolver.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 install(EXPORT ${PROJECT_NAME}Targets
         FILE ${PROJECT_NAME}Targets.cmake
