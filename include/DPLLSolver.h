@@ -23,7 +23,17 @@ namespace SatSolver {
         DPLLSolver(const DPLLSolver &) = default;
         DPLLSolver(DPLLSolver &&)  noexcept = default;
 
+        /**
+         * Constructor that loads clause-set from a .txt file in the DIMACS format.
+         * @param filename path and name (with extension) of DIMACS text-file containing clause-set to operate on.
+         */
         explicit DPLLSolver(const std::string &filename);
+
+        /**
+         * Constructor that takes in a clause-set as a vector of vectors of ints.
+         * The sub-vectors each represents a clause with each int representing a distinct literal.
+         * @param clauses a vector of vectors of ints, representing the clause-set to operate on.
+         */
         explicit DPLLSolver(const std::vector<std::vector<int>>& clauses);
 
         ~DPLLSolver() = default;
@@ -31,6 +41,13 @@ namespace SatSolver {
         DPLLSolver &operator=(const DPLLSolver &) = default;
         DPLLSolver &operator=(DPLLSolver &&) = default;
 
+        /**
+         * Solve the set. Returns true if there is a satisfying interpretation,
+         * or false if the set is unsatisfiable.
+         * If true, the satisfying interpretation can be retrieved
+         * with the GetAssignment member-method.
+         * @return The satisfiability of the starting clause-set.
+         */
         bool Solve();
 
         /**
@@ -48,14 +65,23 @@ namespace SatSolver {
         */
         bool ClauseSetFromFile(const std::string& inFileName);
 
+        /**
+         * Returns a wrapper for the number of atomic variables, and clauses in the clause-set.
+         * @return A metadata structure.
+         */
         [[nodiscard]] const FormulaMetadata& GetMetadata() const { return _metadata; }
+
+        /**
+         * Returns the currently stored interpretation as a map
+         * where the key is an int representing an atomic variable,
+         * and the corresponding value is said variable's currently assigned truth-value.
+         * @return A map with the assignment of truth-values.
+         */
         [[nodiscard]] const std::map<int, bool>& GetAssignment() const { return _assignment; }
 
     private:
         std::vector<std::vector<int>> _clauses{};
         std::map<int, bool> _assignment{};
-
-        std::vector<std::vector<std::vector<int>>> _removedClauses{};
 
         FormulaMetadata _metadata{};
 
@@ -67,8 +93,6 @@ namespace SatSolver {
          * @param litToPropagate literal to propagate
          */
         void UnitPropagation(int litToPropagate);
-
-        void UnitPropagationOptimized(int litToPropagate);
 
         /**
          * Function that finds a unit clause in the given clause-set.

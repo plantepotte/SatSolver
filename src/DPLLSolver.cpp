@@ -79,17 +79,6 @@ namespace SatSolver {
         }
     }
 
-    void DPLLSolver::UnitPropagationOptimized(int litToPropagate) {
-        auto partitionPoint = std::partition(_clauses.begin(), _clauses.end(), [litToPropagate](const std::vector<int> &c) // unary predicate function
-            {
-                // returns true if-clause c contains the given literal, and false otherwise
-                return std::ranges::find(c, litToPropagate) != c.end();
-            });
-        _removedClauses.insert(_removedClauses.end(), std::make_move_iterator(_clauses.begin()), std::make_move_iterator(partitionPoint));
-
-        _clauses.erase(_clauses.begin(), partitionPoint);
-    }
-
     void DPLLSolver::GetIterToUnitClause(std::vector<std::vector<int> >::iterator& clauseIter) {
         clauseIter = std::ranges::find_if(_clauses, [](const std::vector<int> &c) {return c.size() == 1;});
     }
