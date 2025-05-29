@@ -79,8 +79,8 @@ namespace SatSolver {
         }
     }
 
-    void DPLLSolver::GetIterToUnitClause(std::vector<std::vector<int> >::iterator& clauseIter) {
-        clauseIter = std::ranges::find_if(_clauses, [](const std::vector<int> &c) {return c.size() == 1;});
+    void DPLLSolver::GetIterToUnitClause(std::vector<std::vector<int> >::iterator &clauseIter) {
+        clauseIter = std::ranges::find_if(_clauses, [](const std::vector<int> &c) { return c.size() == 1; });
     }
 
     bool DPLLSolver::DPLL() {
@@ -90,7 +90,7 @@ namespace SatSolver {
         }
 
         // retrieve pointer to unit-clause:
-        std::vector<std::vector<int>>::iterator clauseIter;
+        std::vector<std::vector<int> >::iterator clauseIter;
         GetIterToUnitClause(clauseIter);
 
         while (clauseIter != _clauses.end()) // if unit-clause was found attempt to resolve empty clause, or propagate.

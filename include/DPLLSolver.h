@@ -8,11 +8,9 @@
 #include <vector>
 #include <iostream>
 #include <random>
-#include <unordered_map>
 
 namespace SatSolver {
-    struct FormulaMetadata
-    {
+    struct FormulaMetadata {
         size_t numVariables;
         size_t numClauses;
     };
@@ -20,8 +18,10 @@ namespace SatSolver {
     class DPLLSolver {
     public:
         DPLLSolver() = default;
+
         DPLLSolver(const DPLLSolver &) = default;
-        DPLLSolver(DPLLSolver &&)  noexcept = default;
+
+        DPLLSolver(DPLLSolver &&) noexcept = default;
 
         /**
          * Constructor that loads clause-set from a .txt file in the DIMACS format.
@@ -34,11 +34,12 @@ namespace SatSolver {
          * The sub-vectors each represents a clause with each int representing a distinct literal.
          * @param clauses a vector of vectors of ints, representing the clause-set to operate on.
          */
-        explicit DPLLSolver(const std::vector<std::vector<int>>& clauses);
+        explicit DPLLSolver(const std::vector<std::vector<int> > &clauses);
 
         ~DPLLSolver() = default;
 
         DPLLSolver &operator=(const DPLLSolver &) = default;
+
         DPLLSolver &operator=(DPLLSolver &&) = default;
 
         /**
@@ -56,20 +57,20 @@ namespace SatSolver {
          * @param satSolver satisfiability solver object
          * @return modified output stream
          */
-        friend std::ostream& operator<<(std::ostream& os, const DPLLSolver& satSolver);
+        friend std::ostream &operator<<(std::ostream &os, const DPLLSolver &satSolver);
 
         /**
         * Function to read clause-set from text-file in DIMACS format.
         * @param inFileName
         * @return number of literals and clauses in a struct
         */
-        bool ClauseSetFromFile(const std::string& inFileName);
+        bool ClauseSetFromFile(const std::string &inFileName);
 
         /**
          * Returns a wrapper for the number of atomic variables, and clauses in the clause-set.
          * @return A metadata structure.
          */
-        [[nodiscard]] const FormulaMetadata& GetMetadata() const { return _metadata; }
+        [[nodiscard]] const FormulaMetadata &GetMetadata() const { return _metadata; }
 
         /**
          * Returns the currently stored interpretation as a map
@@ -77,10 +78,10 @@ namespace SatSolver {
          * and the corresponding value is said variable's currently assigned truth-value.
          * @return A map with the assignment of truth-values.
          */
-        [[nodiscard]] const std::map<int, bool>& GetAssignment() const { return _assignment; }
+        [[nodiscard]] const std::map<int, bool> &GetAssignment() const { return _assignment; }
 
     private:
-        std::vector<std::vector<int>> _clauses{};
+        std::vector<std::vector<int> > _clauses{};
         std::map<int, bool> _assignment{};
 
         FormulaMetadata _metadata{};
@@ -98,7 +99,7 @@ namespace SatSolver {
          * Function that finds a unit clause in the given clause-set.
          * @return iterator that points to first found unit-clause.
          */
-        void GetIterToUnitClause(std::vector<std::vector<int>>::iterator &clauseIter);
+        void GetIterToUnitClause(std::vector<std::vector<int> >::iterator &clauseIter);
 
         /**
          * My attempt at implementing DPLL for propositional formulas.
@@ -106,7 +107,6 @@ namespace SatSolver {
          */
         bool DPLL();
     };
-
 } // DPLL
 
 #endif //SOLVER_H
