@@ -23,3 +23,16 @@ This requires CMake to be installed.
 
 ### Windows:
  ¯\\\_(ツ)\_/¯
+
+## Usage instructions
+Include the library in your CMake project.
+```cmake
+find_package(SatSolver CONFIG REQUIRED)
+
+target_link_libraries(<Target Name> PRIVATE SatSolver::SatSolver)
+```
+Then, the solver can be included in your C++ files.
+```cpp
+#include <DPLLSolver.h>
+```
+
