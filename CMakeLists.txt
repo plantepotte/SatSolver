@@ -17,6 +17,12 @@ set_target_properties(
             CMAKE_CXX_EXTENSIONS OFF
 )
 
+target_compile_options(
+        ${PROJECT_NAME}
+        PRIVATE
+        "$<$<COMPILE_LANGUAGE:CXX>:-O3;-DNDEBUG;-std=c++23;-march=native;-fpic>"
+)
+
 include(GNUInstallDirs)
 
 target_link_directories(
