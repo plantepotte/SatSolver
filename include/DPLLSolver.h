@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <random>
 
 namespace SatSolver {
     struct formulaMetadata
@@ -53,6 +54,8 @@ namespace SatSolver {
         std::map<int, bool> _assignment{};
 
         formulaMetadata _metadata{};
+
+        std::minstd_rand _generator;
 
         /**
          * Performs unit propagation of the given literal on the given clause set.
