@@ -21,5 +21,5 @@ This requires CMake to be installed.
    cmake --install .
    ```
 
-### Windows
+### Windows:
  ¯\\\_(ツ)\_/¯
