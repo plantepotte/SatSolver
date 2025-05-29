@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <unordered_map>
 
 namespace SatSolver {
     struct FormulaMetadata
@@ -54,6 +55,8 @@ namespace SatSolver {
         std::vector<std::vector<int>> _clauses{};
         std::map<int, bool> _assignment{};
 
+        std::vector<std::vector<std::vector<int>>> _removedClauses{};
+
         FormulaMetadata _metadata{};
 
         std::minstd_rand _generator{std::random_device{}()};
@@ -65,11 +68,13 @@ namespace SatSolver {
          */
         void UnitPropagation(int litToPropagate);
 
+        void UnitPropagationOptimized(int litToPropagate);
+
         /**
          * Function that finds a unit clause in the given clause-set.
          * @return iterator that points to first found unit-clause.
          */
-        std::vector<std::vector<int>>::iterator GetIterToUnitClause();
+        void GetIterToUnitClause(std::vector<std::vector<int>>::iterator &clauseIter);
 
         /**
          * My attempt at implementing DPLL for propositional formulas.
