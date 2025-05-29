@@ -54,29 +54,25 @@ namespace SatSolver {
                 inFile >> parsedLiteral;  // read next literal
             }
         }
-        _metadata = formulaMetadata{numVariables, numClauses};
+        _metadata = FormulaMetadata{numVariables, numClauses};
         return true;
     }
 
     void DPLLSolver::UnitPropagation(int litToPropagate)
     {
-        _clauses.erase(  // unit subsumption
-            std::remove_if(  // removes all clauses c that the predicate function evaluates to true.
-                _clauses.begin(),
-                _clauses.end(),
-                [litToPropagate](const std::vector<int>& c) // unary predicate function
-                {
-                    // returns true if clause c contains the given literal, and false otherwise
-                    return std::find(c.begin(), c.end(), litToPropagate) != c.end();
-                }
-            ),
-            _clauses.end()
+        std::erase_if(  // removes all clauses c that the predicate function evaluates to true.
+            _clauses,
+            [litToPropagate](const std::vector<int>& c) // unary predicate function
+            {
+                // returns true if-clause c contains the given literal, and false otherwise
+                return std::ranges::find(c, litToPropagate) != c.end();
+            }
         );
 
         for (auto& clause : _clauses)  // unit resolution:
         {
             // removes all instances of the negation of the given literal from each clause
-            clause.erase(std::remove(clause.begin(), clause.end(), -litToPropagate), clause.end());
+            std::erase(clause, -litToPropagate);
         }
 
         if (litToPropagate < 0)  // if given literal was ~p, then p is assigned false.
