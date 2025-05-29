@@ -138,7 +138,7 @@ namespace SatSolver {
                           [](const std::vector<int>& c1, const std::vector<int>& c2) { return c1.size() < c2.size(); });
 
         // perform atomic cut with random literal from clause with the least amount of literals
-        std::uniform_int_distribution<size_t> dist{0, _clauses.size()};
+        std::uniform_int_distribution<size_t> dist{0, _clauses[0].size()-1};
         const int litToCut = _clauses[0][dist(_generator)];
 
         std::vector<std::vector<int>> newClauseSet = _clauses;  // copy to continue dpll on
