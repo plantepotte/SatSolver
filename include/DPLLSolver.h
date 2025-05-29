@@ -10,10 +10,10 @@
 #include <random>
 
 namespace SatSolver {
-    struct formulaMetadata
+    struct FormulaMetadata
     {
-        int numVariables;
-        int numClauses;
+        size_t numVariables;
+        size_t numClauses;
     };
 
     class DPLLSolver {
@@ -47,14 +47,14 @@ namespace SatSolver {
         */
         bool ClauseSetFromFile(const std::string& inFileName);
 
-        const formulaMetadata& GetMetadata() const { return _metadata; }
+        const FormulaMetadata& GetMetadata() const { return _metadata; }
         const std::map<int, bool>& GetAssignment() const { return _assignment; }
 
     private:
         std::vector<std::vector<int>> _clauses{};
         std::map<int, bool> _assignment{};
 
-        formulaMetadata _metadata{};
+        FormulaMetadata _metadata{};
 
         std::minstd_rand _generator{std::random_device{}()};
 

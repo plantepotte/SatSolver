@@ -29,7 +29,7 @@ namespace SatSolver {
             std::cout << "Failed to open file: " + inFileName  << '\n';
             return false;
         }
-        int numVariables{-1}, numClauses{-1};
+        size_t numVariables{}, numClauses{};
 
         for (int i = 0; i < 2; ++i)
         {
