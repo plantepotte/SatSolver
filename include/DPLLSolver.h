@@ -56,7 +56,7 @@ namespace SatSolver {
 
         formulaMetadata _metadata{};
 
-        std::minstd_rand _generator;
+        std::minstd_rand _generator{std::random_device{}()};
 
         /**
          * Performs unit propagation of the given literal on the given clause set.

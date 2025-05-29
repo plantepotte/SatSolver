@@ -17,7 +17,6 @@ namespace SatSolver {
     }
 
     bool DPLLSolver::Solve() {
-        _generator.seed(std::random_device{}());
         return DPLL();
     }
 
@@ -145,7 +144,7 @@ namespace SatSolver {
         std::uniform_int_distribution<size_t> dist{0, _clauses[0].size()-1};
         const int litToCut = _clauses[0][dist(_generator)];
 
-        std::vector<std::vector<int>> newClauseSet = _clauses;  // copy to continue dpll on
+        const std::vector<std::vector<int>> newClauseSet = _clauses;  // copy to continue dpll on
         UnitPropagation(litToCut);  // perform unit propagation with cut literal
         if (DPLL())
         {
