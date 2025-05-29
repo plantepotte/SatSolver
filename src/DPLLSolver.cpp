@@ -149,7 +149,7 @@ namespace SatSolver {
         }
 
         // if previous branch was unsatisfiable, try branch with negation of cut literal instead.
-        newClauseSet = _clauses;
+        _clauses = newClauseSet;
         UnitPropagation(-litToCut);
 
         return DPLL();  // return satisfiability of second branch
