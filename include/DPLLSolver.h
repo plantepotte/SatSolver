@@ -23,6 +23,7 @@ namespace SatSolver {
         DPLLSolver(DPLLSolver &&)  noexcept = default;
 
         explicit DPLLSolver(const std::string &filename);
+        explicit DPLLSolver(const std::vector<std::vector<int>>& clauses);
 
         ~DPLLSolver() = default;
 

@@ -12,6 +12,10 @@ namespace SatSolver {
         ClauseSetFromFile(filename);
     }
 
+    DPLLSolver::DPLLSolver(const std::vector<std::vector<int>> &clauses) {
+        _clauses = clauses;
+    }
+
     bool DPLLSolver::Solve() {
         _generator.seed(std::random_device{}());
         return DPLL();
