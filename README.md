@@ -6,7 +6,7 @@ Simple DPLL based SAT solver for fun.
 ### Linux:
 This requires CMake to be installed.
 1. Clone the repo.
-2. Create a subfolder called build.
+2. Create a subfolder in the repo called build.
 3. Navigate to the build-subfolder in a terminal.
 4. Run the command.
    ```bash
