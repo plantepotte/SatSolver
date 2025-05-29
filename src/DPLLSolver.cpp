@@ -89,13 +89,6 @@ namespace SatSolver {
             return true;
         }
 
-        // size_t iteration{};
-        //
-        // while (!_clauses.empty()) {
-        //     std::vector<std::vector<int>>::iterator clauseIter;
-        //     GetIterToUnitClause(clauseIter);
-        // }
-
         // retrieve pointer to unit-clause:
         std::vector<std::vector<int>>::iterator clauseIter;
         GetIterToUnitClause(clauseIter);
