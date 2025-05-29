@@ -14,7 +14,7 @@ namespace SatSolver {
 
     DPLLSolver::DPLLSolver(const std::vector<std::vector<int>> &clauses) {
         _clauses = clauses;
-        _metadata = FormulaMetadata{clauses[0].size(), clauses.size()};
+        _metadata = FormulaMetadata{_clauses.empty() ? 0: clauses[0].size(), clauses.size()};
     }
 
     bool DPLLSolver::Solve() {

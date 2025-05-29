@@ -47,8 +47,8 @@ namespace SatSolver {
         */
         bool ClauseSetFromFile(const std::string& inFileName);
 
-        const FormulaMetadata& GetMetadata() const { return _metadata; }
-        const std::map<int, bool>& GetAssignment() const { return _assignment; }
+        [[nodiscard]] const FormulaMetadata& GetMetadata() const { return _metadata; }
+        [[nodiscard]] const std::map<int, bool>& GetAssignment() const { return _assignment; }
 
     private:
         std::vector<std::vector<int>> _clauses{};
