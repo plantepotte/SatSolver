@@ -118,13 +118,13 @@ namespace SatSolver {
             return true;
         }
 
-        // sort clauses by number of literals, ascending order
-        std::ranges::sort(_clauses,
-                          [](const std::vector<int> &c1, const std::vector<int> &c2) { return c1.size() < c2.size(); });
+        // find smallest clause
+        const auto &smallClause = *std::ranges::min_element(
+            _clauses, [](const std::vector<int> &c, const std::vector<int> &d) { return c.size() < d.size(); });
 
         // perform atomic cut with random literal from clause with the least amount of literals
-        std::uniform_int_distribution<size_t> dist{0, _clauses[0].size() - 1};
-        const int litToCut = _clauses[0][dist(_generator)];
+        std::uniform_int_distribution<size_t> dist{0, smallClause.size() - 1};
+        const int litToCut = smallClause[dist(_generator)];
 
         const std::vector<std::vector<int> > newClauseSet = _clauses; // copy to continue dpll on
         UnitPropagation(litToCut); // perform unit propagation with cut literal
